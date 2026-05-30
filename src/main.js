@@ -178,13 +178,18 @@ window.addEventListener('scroll', highlightActiveSection);
 window.addEventListener('DOMContentLoaded', highlightActiveSection);
 
 // Parallax effect for hero section
+const hero = document.querySelector('.hero');
+let ticking = false;
 window.addEventListener('scroll', () => {
-	const hero = document.querySelector('.hero');
-	if (hero) {
-		const scrolled = window.pageYOffset;
-		const parallaxSpeed = 0.5;
-		hero.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
-	}
+	if (!hero || ticking) return;
+
+	ticking = true;
+	requestAnimationFrame(() => {
+		const scrolled = window.scrollY;
+		const parallaxSpeed = 0.4;
+		hero.style.backgroundPositionY = `-${scrolled * parallaxSpeed}px`;
+		ticking = false;
+	});
 });
 
 // Stagger animations for experience list items
