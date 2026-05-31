@@ -1,5 +1,5 @@
 :root {
-	/* Brand tokens — adapted from Carven brand guide */
+	/* Brand tokens */
 	--ink: #0b0f0d;
 	--ink-2: #1a1f1d;
 	--bg: #ffffff;
@@ -1204,8 +1204,7 @@ ul li {
 }
 
 /* =========================================================
-   Brand layer — Carven-aligned typography & motifs
-   Applied as additive overrides; layout unchanged.
+   Brand layer
    ========================================================= */
 
 #bio h2,
@@ -1299,7 +1298,7 @@ ul li {
 	font-weight: 500;
 }
 
-/* Resume timeline hierarchy — Carven H3 / p-sm */
+/* Resume timeline hierarchy */
 #resume .company-name {
 	font-family: var(--font-display);
 	font-size: 1.35rem;
@@ -1409,7 +1408,7 @@ ul li {
 	opacity: 1;
 }
 
-/* Contact section — ink card with radial lush glow (Carven final-card) */
+/* Contact section — ink card with radial lush glow */
 #contact {
 	position: relative;
 }
