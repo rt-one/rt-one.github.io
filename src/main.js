@@ -1,4 +1,4 @@
-import './configure.js';
+import { configReady } from './configure.js';
 
 // Initialize controller
 var controller = new ScrollMagic.Controller();
@@ -54,41 +54,6 @@ function wateredDownFadeOutAnimation(section) {
 	wateredDownFadeOutAnimation(section);
 });
 
-// Calculate years of experience with counter animation
-const yearsOfExperience = new Date().getFullYear() - 2013;
-
-function animateCounter(element, target, duration = 2000) {
-	let start = 0;
-	const increment = target / (duration / 16); // 60 FPS
-	const timer = setInterval(() => {
-		start += increment;
-		if (start >= target) {
-			element.textContent = target;
-			clearInterval(timer);
-		} else {
-			element.textContent = Math.floor(start);
-		}
-	}, 16);
-}
-
-// Animate counter when element is in view
-const yearsElement = document.getElementById('years-of-experience');
-if (yearsElement) {
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					animateCounter(yearsElement, yearsOfExperience, 1500);
-					observer.unobserve(entry.target);
-				}
-			});
-		},
-		{ threshold: 0.5 },
-	);
-
-	observer.observe(yearsElement);
-}
-
 // Hero title is now rendered statically with brand styling
 // (lush highlight bar + gradient italic word). Animation handled in CSS.
 
@@ -113,27 +78,9 @@ function openPortfolioItem(url, eventLabel) {
 	window.open(url, '_blank');
 }
 
-// Update the meta description with the years of experience
-function updateMetaDescription() {
-	const metaDescription = document.getElementById('meta-description');
-	if (metaDescription) {
-		metaDescription.setAttribute(
-			'content',
-			`Andrew Hyte's personal site. Principal AI Engineer with ${yearsOfExperience} years of professional experience — a force multiplier for engineering teams building the agentic platforms that give teams the leverage to outpace the upstarts.`,
-		);
-	}
-}
-
-// Initialize the meta description
-updateMetaDescription();
-
-// Call the function to update the meta description when the page is loaded
-document.addEventListener('DOMContentLoaded', updateMetaDescription);
-
 // Attach functions to window
 window.trackOpenVentureBeat = trackOpenVentureBeat;
 window.openPortfolioItem = openPortfolioItem;
-window.updateMetaDescription = updateMetaDescription;
 
 // Active section highlighting for side navigation
 function highlightActiveSection() {
@@ -222,9 +169,10 @@ function initStaggerAnimations() {
 }
 
 // Run after DOM is loaded and config.json is processed
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 	// Wait for config.js to populate the experience section
-	setTimeout(initStaggerAnimations, 500);
+	await configReady;
+	initStaggerAnimations();
 });
 
 // Obfuscated contact information - decode on page load
