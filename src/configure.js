@@ -139,99 +139,113 @@ function buildCompanyCard(group) {
 	return card;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-	fetch('public/config.json')
-		.then((response) => response.json())
-		.then((data) => {
-			// Generate Experience Section (grouped by company)
-			const experienceSection = document.getElementById('experience-section');
-			experienceSection.innerHTML = '';
-			data.experience.forEach((group) => {
-				experienceSection.appendChild(buildCompanyCard(group));
-			});
+export const configReady = new Promise((resolve, reject) => {
+	document.addEventListener('DOMContentLoaded', async () => {
+		try {
+			await fetch('public/config.json')
+				.then((response) => response.json())
+				.then((data) => {
+					// Generate Experience Section (grouped by company)
+					const experienceSection = document.getElementById('experience-section');
+					experienceSection.innerHTML = '';
+					data.experience.forEach((group) => {
+						experienceSection.appendChild(buildCompanyCard(group));
+					});
 
-			// Generate Skills Section
-			const skillsSection = document.getElementById('skills-section');
-			skillsSection.innerHTML = '';
+					// Generate Skills Section
+					const skillsSection = document.getElementById('skills-section');
+					skillsSection.innerHTML = '';
 
-			data.skills.forEach((skill) => {
-				const skillItem = document.createElement('div');
-				skillItem.classList.add('resume-item', 'd-flex', 'gap-2', 'align-items-center', 'col-auto');
+					data.skills.forEach((skill) => {
+						const skillItem = document.createElement('div');
+						skillItem.classList.add(
+							'resume-item',
+							'd-flex',
+							'gap-2',
+							'align-items-center',
+							'col-auto',
+						);
 
-				const skillIcon = document.createElement('img');
-				skillIcon.classList.add('skill-icon', 'rounded-3');
-				skillIcon.width = '32';
-				skillIcon.height = '32';
-				skillIcon.src = `${skill.icon}`;
+						const skillIcon = document.createElement('img');
+						skillIcon.classList.add('skill-icon', 'rounded-3');
+						skillIcon.width = '32';
+						skillIcon.height = '32';
+						skillIcon.src = `${skill.icon}`;
 
-				const skillName = document.createElement('h4');
-				skillName.classList.add('resume-header', 'm-0');
-				skillName.textContent = `${skill.name}`;
+						const skillName = document.createElement('h4');
+						skillName.classList.add('resume-header', 'm-0');
+						skillName.textContent = `${skill.name}`;
 
-				skillItem.appendChild(skillIcon);
-				skillItem.appendChild(skillName);
+						skillItem.appendChild(skillIcon);
+						skillItem.appendChild(skillName);
 
-				skillsSection.appendChild(skillItem);
-			});
+						skillsSection.appendChild(skillItem);
+					});
 
-			// Generate Education Section
-			const educationSection = document.getElementById('education-section');
-			educationSection.innerHTML = '';
-			data.education.forEach((item) => {
-				const educationItem = document.createElement('div');
-				educationItem.classList.add('resume-item');
+					// Generate Education Section
+					const educationSection = document.getElementById('education-section');
+					educationSection.innerHTML = '';
+					data.education.forEach((item) => {
+						const educationItem = document.createElement('div');
+						educationItem.classList.add('resume-item');
 
-				const header = document.createElement('div');
-				header.classList.add(
-					'd-flex',
-					'flex-column',
-					'flex-sm-row',
-					'justify-content-between',
-					'align-items-start',
-					'align-items-sm-center',
-				);
-				const degree = document.createElement('h4');
-				degree.classList.add('resume-header');
-				degree.textContent = item.degree;
-				const date = document.createElement('p');
-				date.classList.add('date-range');
-				date.textContent = item.date;
-				header.appendChild(degree);
-				header.appendChild(date);
+						const header = document.createElement('div');
+						header.classList.add(
+							'd-flex',
+							'flex-column',
+							'flex-sm-row',
+							'justify-content-between',
+							'align-items-start',
+							'align-items-sm-center',
+						);
+						const degree = document.createElement('h4');
+						degree.classList.add('resume-header');
+						degree.textContent = item.degree;
+						const date = document.createElement('p');
+						date.classList.add('date-range');
+						date.textContent = item.date;
+						header.appendChild(degree);
+						header.appendChild(date);
 
-				const institutionDetails = document.createElement('div');
-				institutionDetails.classList.add(
-					'd-flex',
-					'flex-column',
-					'flex-sm-row',
-					'justify-content-between',
-					'align-items-start',
-					'align-items-sm-center',
-				);
-				const institution = document.createElement('p');
-				institution.classList.add('company-details');
-				institution.textContent = item.institution;
-				const location = document.createElement('p');
-				location.classList.add('location');
-				location.textContent = item.location;
-				institutionDetails.appendChild(institution);
-				institutionDetails.appendChild(location);
+						const institutionDetails = document.createElement('div');
+						institutionDetails.classList.add(
+							'd-flex',
+							'flex-column',
+							'flex-sm-row',
+							'justify-content-between',
+							'align-items-start',
+							'align-items-sm-center',
+						);
+						const institution = document.createElement('p');
+						institution.classList.add('company-details');
+						institution.textContent = item.institution;
+						const location = document.createElement('p');
+						location.classList.add('location');
+						location.textContent = item.location;
+						institutionDetails.appendChild(institution);
+						institutionDetails.appendChild(location);
 
-				const grade = document.createElement('div');
-				grade.classList.add('d-flex', 'align-items-center', 'gap-1', 'fst-italic', 'small');
-				grade.textContent = 'GPA:';
-				const gradeValue = document.createElement('span');
-				gradeValue.textContent = item.grade;
-				grade.appendChild(gradeValue);
+						const grade = document.createElement('div');
+						grade.classList.add('d-flex', 'align-items-center', 'gap-1', 'fst-italic', 'small');
+						grade.textContent = 'GPA:';
+						const gradeValue = document.createElement('span');
+						gradeValue.textContent = item.grade;
+						grade.appendChild(gradeValue);
 
-				educationItem.appendChild(header);
-				educationItem.appendChild(institutionDetails);
-				educationItem.appendChild(grade);
+						educationItem.appendChild(header);
+						educationItem.appendChild(institutionDetails);
+						educationItem.appendChild(grade);
 
-				educationSection.appendChild(educationItem);
-			});
-		})
-		.catch((error) => {
-			console.error('Error fetching config:', error);
-		});
+						educationSection.appendChild(educationItem);
+					});
+					resolve();
+				})
+				.catch((err) => {
+					console.error('Error fetching config:', err);
+					reject(err);
+				});
+		} catch (err) {
+			reject(err);
+		}
+	});
 });
