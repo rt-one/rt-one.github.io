@@ -36,30 +36,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="./src/styles.css" />
   <!-- ScrollMagic and GSAP Scripts -->
-  <script src="https://lib.arvancloud.ir/gsap/3.9.1/gsap.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
-  <script src="https://lib.arvancloud.ir/ScrollMagic/2.0.8/ScrollMagic.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
-  <script src="https://lib.arvancloud.ir/ScrollMagic/2.0.8/plugins/animation.gsap.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
-  <script src="https://lib.arvancloud.ir/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/scrollmagic@2.0.8/scrollmagic/minified/ScrollMagic.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/scrollmagic@2.0.8/scrollmagic/minified/plugins/animation.gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/scrollmagic@2.0.8/scrollmagic/minified/plugins/debug.addIndicators.min.js" crossorigin="anonymous"></script>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX0REXJ6CG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
-
-  gtag('config', 'G-SX0REXJ6CG');
-</script>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -95,6 +80,7 @@
   </nav>
 
   <header class="hero text-white text-center py-5 d-flex">
+    <div class="hero-bg"></div>
     <div class="fluid-container glass px-3 pt-3 pb-4">
       <span class="hero-eyebrow">
         <span class="pill">Front-End Developer</span>
@@ -140,7 +126,7 @@
       <main class="col-lg-10 pt-4 mx-auto">
         <section id="bio" class="pt-4 py-5">
           <h2 class="text-center mb-5">Bio</h2>
-          <div class="row d-flex align-items-center mx-0">
+          <div class="row d-flex align-items-center mx-0 ps-md-3">
             <div class="col-md-3">
               <img src="./public/ramtin_profile.jpg" alt="Photo of Ramtin Nasr."
                 class="img-fluid rounded-circle mb-3 bio-image" />
@@ -266,8 +252,7 @@
     </div>
   </footer>
 
-  <script src="https://lib.arvancloud.ir/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
   <script src="./src/main.js" type="module" defer></script>
