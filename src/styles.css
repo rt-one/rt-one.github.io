@@ -13,14 +13,19 @@
 	--lush-soft: #dff0e6;
 	--lush-softer: #eef7f1;
 	--lush-line: #b8e0c7;
-	--grad-warm: linear-gradient(100deg, #e67843 0%, #ed9352 35%, #f2b85e 65%, #f5d26f 100%);
+	--grad-warm: linear-gradient(
+		100deg,
+		#e67843 0%,
+		#ed9352 35%,
+		#f6b85c 65%,
+		rgb(255, 189, 75) 100%
+	);
 
 	--font-sans:
 		'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
 		Arial, sans-serif;
 	--font-display: 'Inter Tight', var(--font-sans);
 	--font-italic: 'Instrument Serif', Georgia, serif;
-	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
 	/* Legacy tokens kept for compatibility with existing rules */
 	--primary-color: var(--lush-deep);
@@ -31,7 +36,7 @@
 }
 
 body {
-	padding-top: 56px;
+	margin-top: 56px;
 	--bs-primary: var(--lush-deep);
 	--bs-primary-rgb: 31, 122, 82;
 	font-family: var(--font-sans);
@@ -43,8 +48,7 @@ body {
 }
 
 .hero {
-	background: url('../public/bg.jpg') center center/cover no-repeat;
-	height: calc(100vh - 56px); /* 56px is the height of the navbar */
+	height: calc(100vh - 56px); /* subtracting the body top margin */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -52,8 +56,6 @@ body {
 	text-align: center;
 	position: relative;
 	overflow: hidden;
-	background-attachment: fixed;
-	background-position: center;
 }
 
 .hero::before {
@@ -66,6 +68,17 @@ body {
 	z-index: 0;
 }
 
+.hero-bg {
+	position: absolute;
+	inset: 0;
+	background: url('../public/bg.jpg') center center/cover no-repeat;
+	z-index: -1;
+	will-change: transform;
+	transform: translateZ(0);
+	background-attachment: fixed;
+	background-position: center;
+}
+
 .hero .glass {
 	position: relative;
 	z-index: 1;
@@ -73,17 +86,17 @@ body {
 	backdrop-filter: blur(4px) saturate(140%);
 	-webkit-backdrop-filter: blur(4px) saturate(140%);
 	border: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: 20px;
-	padding: 36px 44px 32px;
-	box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
+	border-radius: 30px;
+	box-shadow: 0 20px 80px -30px rgba(0, 0, 0, 0.5);
 	max-width: min(840px, 90vw);
+	margin-bottom: 56px; /* based on the body top margin */
 }
 
 .hero .hero-eyebrow {
 	display: inline-flex;
 	align-items: center;
 	gap: 10px;
-	padding: 6px 14px 6px 6px;
+	padding: 6px 12px 6px 9px;
 	border-radius: 999px;
 	background: rgba(63, 168, 120, 0.16);
 	border: 1px solid rgba(184, 224, 199, 0.35);
@@ -1360,14 +1373,6 @@ ul li {
 	margin-left: 4px;
 }
 
-/* Navbar refinement */
-.navbar {
-	background: rgba(255, 255, 255, 0.92);
-	backdrop-filter: saturate(160%) blur(10px);
-	-webkit-backdrop-filter: saturate(160%) blur(10px);
-	border-bottom: 1px solid var(--line);
-}
-
 .navbar .navbar-brand,
 .navbar .nav-link {
 	font-family: var(--font-sans);
@@ -1539,7 +1544,7 @@ a:hover {
    ========================================================= */
 
 .navbar.navbar-light {
-	background: rgb(255 255 255 / 62%);
+	background: rgba(240, 240, 240, 0.6);
 	backdrop-filter: saturate(160%) blur(15px);
 	-webkit-backdrop-filter: saturate(160%) blur(15px);
 	border-bottom: 1px solid var(--line);
