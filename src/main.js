@@ -60,28 +60,6 @@ function wateredDownFadeOutAnimation(section) {
 // Get the current year for the footer
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-// Track the open of the venturebeat article
-function trackOpenVentureBeat() {
-	gtag('event', 'open_venturebeat', {
-		event_category: 'button',
-		event_label: 'Open VentureBeat Article',
-	});
-}
-
-// Open a portfolio item, track the event, and open the link in a new tab
-function openPortfolioItem(url, eventLabel) {
-	gtag('event', 'open_portfolio_item', {
-		event_category: 'button',
-		event_label: eventLabel,
-	});
-
-	window.open(url, '_blank');
-}
-
-// Attach functions to window
-window.trackOpenVentureBeat = trackOpenVentureBeat;
-window.openPortfolioItem = openPortfolioItem;
-
 // Active section highlighting for side navigation
 function highlightActiveSection() {
 	const sections = document.querySelectorAll('section[id]');
@@ -124,20 +102,23 @@ function highlightActiveSection() {
 window.addEventListener('scroll', highlightActiveSection);
 window.addEventListener('DOMContentLoaded', highlightActiveSection);
 
-// Parallax effect for hero section
-const hero = document.querySelector('.hero');
+// // Parallax effect for hero section
+const heroBg = document.querySelector('.hero-bg');
 let ticking = false;
-window.addEventListener('scroll', () => {
-	if (!hero || ticking) return;
+window.addEventListener(
+	'scroll',
+	() => {
+		if (!heroBg || ticking) return;
 
-	ticking = true;
-	requestAnimationFrame(() => {
-		const scrolled = window.scrollY;
-		const parallaxSpeed = 0.4;
-		hero.style.backgroundPositionY = `-${scrolled * parallaxSpeed}px`;
-		ticking = false;
-	});
-});
+		ticking = true;
+		requestAnimationFrame(() => {
+			const parallaxSpeed = 0.4;
+			heroBg.style.transform = `translateY(${window.scrollY * parallaxSpeed}px`;
+			ticking = false;
+		});
+	},
+	{ passive: true },
+);
 
 // Stagger animations for experience list items
 function initStaggerAnimations() {
